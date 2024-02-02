@@ -99,7 +99,7 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
         mPainter->setPen(pincel);
         mPainter->drawLine(mInicial, mFinal);
         // Mostrar el número de líneas en la barra de estado
-        ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
+        ui->statusbar->showMessage(tr("Número de líneas: ") + QString::number(++mNumLineas));
         // Actualizar la interfaz (repinta con paintEvent)
         update();
         // actualizar el punto inicial
@@ -173,8 +173,8 @@ void Principal::mouseReleaseEvent(QMouseEvent *event)
 void Principal::on_actionAncho_triggered()
 {
     mAncho = QInputDialog::getInt(this,
-                                  "Ancho del pincel",
-                                  "Ingrese el ancho del pincel de dibujo",
+                                  tr("Ancho del pincel"),
+                                  tr("Ingrese el ancho del pincel de dibujo"),
                                   mAncho,
                                   1, 20);
 }
@@ -188,7 +188,7 @@ void Principal::on_actionColor_triggered()
 {
     mColor = QColorDialog::getColor(mColor,
                                     this,
-                                    "Color del pincel");
+                                    tr("Color del pincel"));
 }
 
 void Principal::on_actionNuevo_triggered()
@@ -202,22 +202,22 @@ void Principal::on_actionGuardar_triggered()
 {
     // Abrir cuadro de diálogo para obtener el nombre del archivo
     QString nombreArchivo = QFileDialog::getSaveFileName(this,
-                                                         "Guardar imagen",
+                                                         tr("Guardar imagen"),
                                                          QString(),
-                                                         "Imágenes .png (*.png)");
+                                                         tr("Imágenes .png (*.png)"));
     // Validar que el nombre del archivo no sea vacío
     if ( !nombreArchivo.isEmpty() ){
         // Guardar imagen
         if (mImagen->save(nombreArchivo)){
             // Si todo va bien, muestra un mensaje de información
             QMessageBox::information(this,
-                                     "Guardar imagen",
-                                     "Archivo almacenado en: " + nombreArchivo);
+                                     tr("Guardar imagen"),
+                                     tr("Archivo almacenado en: ") + nombreArchivo);
         } else{
             // Si hay algún error, muestro advertencia
             QMessageBox::warning(this,
-                                 "Guardar imagen",
-                                 "No se pudo almacenar la imagen.");
+                                 tr("Guardar imagen"),
+                                 tr("No se pudo almacenar la imagen."));
         }
     }
 }
